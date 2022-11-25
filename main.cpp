@@ -1,6 +1,10 @@
 ﻿#include <Novice.h>
 
 const char kWindowTitle[] = "学籍番号";
+float easeInQuad(float t, float b, float c, float d) {
+	t /= d;
+	return c * t * t + b;
+};
 
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
@@ -15,6 +19,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	int PosX[4];
 	int PosY[4];
 	int Speed[4];
+	float t = 1;
+	float c = 1000;
+	float d = 18;
+	PosX[0] = 50;
+	PosY[0] = 50;
+	Speed[0] = 2;
+	PosX[3] = 50;
+	PosY[3] = 600;
 
 	// ウィンドウの×ボタンが押されるまでループ
 	while (Novice::ProcessMessage() == 0) {
@@ -28,12 +40,15 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		///
 		/// ↓更新処理ここから
 		///
-		PosX[0] = 50;
-		Speed[0] = 2;
+		
 		PosX[0] += Speed[0];
-		if (PosX[0] == 1230) {
+		if (PosX[0] >= 1230) {
 			Speed[0] = 0;
 		}
+		if (PosX[3] <= 1230) {
+			PosX[3] = easeInQuad(t, PosX[3], c, d);
+		}
+		
 		///
 		/// ↑更新処理ここまで
 		///
