@@ -14,6 +14,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	int PosX[4];
 	int PosY[4];
+	int Speed[4];
 
 	// ウィンドウの×ボタンが押されるまでループ
 	while (Novice::ProcessMessage() == 0) {
@@ -27,7 +28,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		///
 		/// ↓更新処理ここから
 		///
-
+		PosX[0] = 50;
+		Speed[0] = 2;
+		PosX[0] += Speed[0];
+		if (PosX[0] == 1230) {
+			Speed[0] = 0;
+		}
 		///
 		/// ↑更新処理ここまで
 		///
@@ -35,7 +41,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		///
 		/// ↓描画処理ここから
 		///
-
+		Novice::DrawBox(PosX[0], PosY[0], 16, 16, 0.0f, WHITE, kFillModeSolid);
+		Novice::DrawBox(PosX[1], PosY[1], 16, 16, 0.0f, WHITE, kFillModeSolid);
+		Novice::DrawBox(PosX[2], PosY[2], 16, 16, 0.0f, WHITE, kFillModeSolid);
+		Novice::DrawBox(PosX[3], PosY[3], 16, 16, 0.0f, WHITE, kFillModeSolid);
 		///
 		/// ↑描画処理ここまで
 		///
